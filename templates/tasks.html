@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Table List</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>TASK NAME</th>
+            <th>DESCRIPTION</th>
+            <th>MAXIMUM MARK</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.task_id }}</td>
+            <td>{{ task.task_name }}</td>
+            <td>{{ task.task_description }}</td>
+            <td>{{ task.maximum_marks }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
