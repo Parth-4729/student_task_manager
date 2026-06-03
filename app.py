@@ -90,8 +90,7 @@ def home():
 def add_student():
     #check form submission
     if request.method == 'POST':
-        #get form data
-        first_name = request.form['first_name'] 
+        first_Name = request.form['first_Name'] 
         last_name = request.form['last_name']
         gender = request.form['gender']
         mobile_number = request.form['mobile_number']
@@ -105,9 +104,9 @@ def add_student():
         cursor = connection.cursor()
 
         #sql insert query
-        query = """INSERT INTO students (first_name, last_name, gender, mobile_number, email, course_name, admission_date) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+        query = """INSERT INTO students (first_Name, last_name, gender, mobile_number, email, course_name, admission_date) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
         #execute the query 
-        cursor.execute(query, (first_name, last_name, gender, mobile_number, email, course_name, admission_date))
+        cursor.execute(query, (first_Name, last_name, gender, mobile_number, email, course_name, admission_date))
 
         #save the changes
         connection.commit()
@@ -190,7 +189,7 @@ def edit_student(student_id):
 @app.route('/update_student/<int:student_id>', methods=['POST'])
 def update_student(student_id):
 
-    first_name = request.form['first_name'] 
+    first_name = request.form['first_Name'] 
     last_name = request.form['last_name']  
     email= request.form['email']
     mobile_number= request.form['mobile_number']
@@ -201,14 +200,14 @@ def update_student(student_id):
 
     query = """UPDATE students
         SET 
-            first_name = %s, 
+            first_Name = %s, 
             last_name = %s,
             email = %s,
             mobile_number = %s,
             course_name= %s
             WHERE student_id = %s
         """
-    cursor.execute(query, (first_name, last_name,email,mobile_number,course_name,student_id))
+    cursor.execute(query, (first_Name, last_name,email,mobile_number,course_name,student_id))
     connection.commit()
 
     cursor.close()
@@ -280,7 +279,7 @@ def attendance_report():
             attendance.attendance_date,
             attendance.attendance_status,
 
-            students.first_name,
+            students.first_Name,
             students.last_name,
             students.course_name
         From attendance
@@ -371,7 +370,7 @@ def student_tasks():
             student_tasks.obtained_marks,
             student_tasks.submission_date,
 
-            students.first_name,
+            students.first_Name,
             students.last_name,
 
             tasks.task_name
@@ -405,7 +404,7 @@ def performance_report():
         SELECT
 
             students.student_id,
-            students.first_name,
+            students.first_Name,
             students.last_name,
             students.course_name,
 
@@ -433,7 +432,7 @@ def performance_report():
 
         GROUP BY
             students.student_id,
-            students.first_name,
+            students.first_Name,
             students.last_name,
             students.course_name
 
